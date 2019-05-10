@@ -1,9 +1,10 @@
 EXECS=king
-cc=gcc
+CC=gcc
 
-all:${EXECS}
+all=${EXECS}
+
 king:hello.c
-	$ cc  hello.c -o king
+	$(CC)  hello.c -o king
 
 clean:
 	rm -f ${EXECS}
