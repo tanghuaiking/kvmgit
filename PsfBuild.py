@@ -40,8 +40,7 @@ def AiryFunc(rn,size,cx,cy):
     x = np.linspace(1, size, size)
     y = np.linspace(1,size, size)
     X,Y = np.meshgrid(x,y) 
-    out=(4*(scipy.special.jn(1,((X-(N/2+1))**2+(Y-(N/2+1))**2)**0.5*a*math.pi)
-           /(((X-(N/2+1))**2+(Y-(N/2+1))**2)**0.5*a*math.pi))**2)
+    out=(4*(scipy.special.jn(1,((X-cx)**2+(Y-cy)**2)**0.5*a*math.pi)/(((X-cx)**2+(Y-cy)**2)**0.5*a*math.pi))**2)
     if cx/2==int(cx/2) and cy/2==int(cy/2):
         out[int(N/2),int(N/2)]=1
     return out

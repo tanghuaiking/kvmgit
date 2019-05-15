@@ -10,7 +10,7 @@ import numpy as np
 from photutils import centroid_com, centroid_1dg, centroid_2dg
 import time
 
-def compareW(PSF):
+def compareW(PSF,sig,accd,cx,cy):
     x1, y1 = centroid_com(PSF)
     x2, y2 = centroid_1dg(PSF)
     x3, y3 = centroid_2dg(PSF)
@@ -58,15 +58,15 @@ if __name__=='__main__':
     for isample in range(0,nsample):
         cx=accd/2+np.random.rand(1,1)
         cy=accd/2+np.random.rand(1,1)
-        sig=4
-        PSF=GaussianFunc(sig,accd,cx,cy)
+        sig=3
+#        PSF=GaussianFunc(sig,accd,cx,cy)
         #PSF=MoffatFunc(accd,20,2.5,cx,cy)
         ree80=sig*1.794;
-        #PSF=AiryFunc(ree80,accd,cx,cy)
+        PSF=AiryFunc(ree80,accd,cx,cy)
         nosemg=0.001;
-        NOSE=10*nosemg*np.random.rand(accd,accd)+nosemg*PSF*np.random.rand(accd,accd)
+        NOSE=10*nosemg*np.random.randn(accd,accd)+nosemg*PSF*np.random.rand(accd,accd)
         PSF=PSF+NOSE
-        [a,b,c,d,e,f]=compareW(PSF)
+        [a,b,c,d,e,f]=compareW(PSF,sig,accd,cx,cy)
         erra1[isample,0]=a
         erra2[isample,0]=b
         erra3[isample,0]=c
